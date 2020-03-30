@@ -11,7 +11,7 @@ class SiswaController extends Controller
     {
     	$data['siswa']  =\DB::table('t_siswa')
     	->orderBy('jenkel', 'ASC')
-    	->where('nama_lengkap','like','%o%')
+    	// ->where('nama_lengkap','like','%o%')
     	->get();
 		return view('belajar',$data);
     

@@ -37,7 +37,7 @@
 
 		<div class="form-group">
 		<label for="nama_lengkap">Nama Lengkap</label>
-		<input type="text" id="nis" class="form-control  bg-light border border-danger" placeholder="Masukkan Nama Lengkap Anda" name="nama_lengkap"  value="{{ old('nama_lengkap')	 }}">
+		<input type="text" id="nama_lengkap" class="form-control  bg-light border border-danger" placeholder="Masukkan Nama Lengkap Anda" name="nama_lengkap"  value="{{ old('nama_lengkap')	 }}">
 		</div>
 
 
@@ -45,7 +45,7 @@
 		Jenis Kelamin	:<br>
 			<label class="form-check-label"><input style="border-color: red;"  class=" form-check-input" type="radio" name="jenkel"  id="pria"  value="L" {{old('jenkel')=="L" ? 'checked=' . '"' . 'checked' . '"' : '' }} />L</label><br>
 
-			<label form-check-label><input style="border-color: red;"  class="form-check-input"  type="radio" name="jenkel" id="wanita" value="L" {{old('jenkel')=="P" ? 'checked=' . '"' . 'checked' . '"' : '' }} />P</label><br>
+			<label form-check-label><input style="border-color: red;"  class="form-check-input"  type="radio" name="jenkel" id="wanita" value="P" {{old('jenkel')=="P" ? 'checked=' . '"' . 'checked' . '"' : '' }} />P</label><br>
 		</div>
 		
 		

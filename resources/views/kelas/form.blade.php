@@ -27,22 +27,26 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-6 ">	
 	<h1 align="center">Form Data Kelas</h1>
-	<form action="{{ url('kelas') }}" method="POST">
+	<form action="{{ url('kelas', @$kelas->id) }}" method="POST">
 		@csrf
+
+		@if(!empty($kelas))
+			@method('PATCH')
+		@endif
 
 		<div class="form-group">
 		<label for="nama_kelas">Nama Kelas</label>
-		<input type="text" id="nama_kelas" class="form-control bg-light border border-danger" placeholder="Masukkan Nama Kelas Anda" name="nama_kelas" value="{{ old('nama_kelas')	 }}"/>
+		<input type="text" id="nama_kelas" class="form-control bg-light border border-danger" placeholder="Masukkan Nama Kelas Anda" name="nama_kelas" value="{{ old('nama_kelas', @$kelas->nama_kelas)	 }}"/>
 		</div>
 
 		<div class="form-group">
 		<label for="lokasi_ruangan">Lokasi Ruangan</label>
-		<input type="text" id="lokasi_ruangan" class="form-control  bg-light border border-danger" placeholder="Masukkan Lokasi Ruangan Anda" name="lokasi_ruangan" value="{{ old('lokasi_ruangan')	 }}">
+		<input type="text" id="lokasi_ruangan" class="form-control  bg-light border border-danger" placeholder="Masukkan Lokasi Ruangan Anda" name="lokasi_ruangan" value="{{ old('lokasi_ruangan', @$kelas->lokasi_ruangan)	 }}">
 		</div>
 
 		<div class="form-group">
 		<label for="nama_wali_kelas">Nama Wali Kelas</label>
-		<input type="text" id="nama_wali_kelas" class="form-control bg-light border border-danger" placeholder="Masukkan Nama Wali Kelas Anda" name="nama_wali_kelas" value="{{ old('nama_wali_kelas')	 }}"/>
+		<input type="text" id="nama_wali_kelas" class="form-control bg-light border border-danger" placeholder="Masukkan Nama Wali Kelas Anda" name="nama_wali_kelas" value="{{ old('nama_wali_kelas', @$kelas->nama_wali_kelas)	 }}"/>
 		</div>
 		
 		
@@ -50,12 +54,12 @@
 	    <label for="jurusan">Jurusan</label>
 	    <select multiple class="form-control bg-light border border-danger" id="jurusan" name="jurusan"  >
 	      <option readonly value=""> -Pilih Jurusan Anda- </option>
-	      <option value="Rekayasa Perangkat lunak" 		  @if (old('jurusan') == "Rekayasa Perangkat lunak") {{ 'selected' }} @endif>Rekayasa Perangkat lunak</option>
-	      <option value="Teknik Komputer Jaringan" 		  @if (old('jurusan') == "Teknik Komputer Jaringan") {{ 'selected' }} @endif>Teknik Komputer Jaringan</option>
-	      <option value="Multimedia" 			   		  @if (old('jurusan') == "Multimedia") {{ 'selected' }} @endif>Multimedia</option>
-	      <option value="Teknik Audio Video" 	   		  @if (old('jurusan') == "Teknik Audio Video") {{ 'selected' }} @endif>Teknik Audio Video</option>
-	      <option value="Teknik Instalasi Tenaga Listrik" @if (old('jurusan') == "Teknik Instalasi Tenaga Listrik") {{ 'selected' }} @endif>Teknik Instalasi Tenaga Listrik</option>
-	      <option value="Teknik Otomasi Industri" @if (old('goldar') == "Teknik Otomasi Industri") {{ 'selected' }} @endif>Teknik Otomasi Industri</option>
+	      <option value="Rekayasa Perangkat lunak" 		  @if (old('jurusan', @$kelas->jurusan) == "Rekayasa Perangkat lunak") 	      {{ 'selected' }} @endif>Rekayasa Perangkat lunak</option>
+	      <option value="Teknik Komputer Jaringan" 		  @if (old('jurusan', @$kelas->jurusan) == "Teknik Komputer Jaringan")        {{ 'selected' }} @endif>Teknik Komputer Jaringan</option>
+	      <option value="Multimedia" 			   		  @if (old('jurusan', @$kelas->jurusan) == "Multimedia") 			          {{ 'selected' }} @endif>Multimedia</option>
+	      <option value="Teknik Audio Video" 	   		  @if (old('jurusan', @$kelas->jurusan) == "Teknik Audio Video") 	   		  {{ 'selected' }} @endif>Teknik Audio Video</option>
+	      <option value="Teknik Instalasi Tenaga Listrik" @if (old('jurusan', @$kelas->jurusan) == "Teknik Instalasi Tenaga Listrik") {{ 'selected' }} @endif>Teknik Instalasi Tenaga Listrik</option>
+	      <option value="Teknik Otomasi Industri" 	      @if (old('jurusan', @$kelas->jurusan) == "Teknik Otomasi Industri")         {{ 'selected' }} @endif>Teknik Otomasi Industri</option>
 	    </select>
 	  </div><br>
 

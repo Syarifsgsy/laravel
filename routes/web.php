@@ -23,11 +23,19 @@ Route::get('/', function() {
 Route::get('/siswa', 'SiswaController@index');
 Route::get('/siswa/create', 'SiswaController@create');
 Route::post('/siswa', 'SiswaController@store');
+Route::get('/siswa/{id}/edit', 'SiswaController@edit');
+Route::patch('/siswa/{id}', 'SiswaController@update');
+Route::delete('/siswa/{id}', 'SiswaController@destroy');
+
 
 // Route::get('/belajar', 'SiswaController@index');
 Route::get('/kelas', 'KelasController@index');
 Route::get('/kelas/create', 'KelasController@create');
 Route::post('/kelas', 'KelasController@store');
+Route::get('/kelas/{id}/edit', 'KelasController@edit');
+Route::patch('/kelas/{id}', 'KelasController@update');
+Route::delete('/kelas/{id}', 'KelasController@destroy');
+
 
 // Route::get('/belajar', function() {
 	

@@ -10,7 +10,7 @@ class SiswaController extends Controller
     public function index()
     {
     	$data['siswa']  =\DB::table('t_siswa')
-    	->orderBy('jenkel', 'ASC')
+    	// ->orderBy('jenkel', 'ASC')
     	// ->where('nama_lengkap','like','%o%')
     	->get();
 		return view('belajar',$data);
@@ -85,5 +85,55 @@ class SiswaController extends Controller
     	}else{
     		return redirect('/siswa/create')->with(['error' => ' Tidak Berhasil ditambahkan']);
     	}
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $data['siswa']      = \DB::table('t_siswa')->find($id);
+        return view('siswa.form', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+
+        $pesan  =[
+            'required'        =>":attribute nya Tolong diisi ya",
+            'string'          =>":attribute Tolong dengan huruf...",
+            'min'             =>":attribute Harap isi minimal 3 karakter",
+            'max'             =>":attribute Harap diisi maksimal 10 karakter",
+            //'alpha'           =>":attribute hanya boleh pake huruf oke",          
+            ];
+
+
+        $rule   =[
+            'nis'           => 'required|numeric',
+            'nama_lengkap'  => 'required|string',
+            'jenkel'        => 'required',
+            'goldar'        => 'required',
+        ];
+        $this->validate($request, $rule,$pesan);
+
+        $input  =$request->all();
+        unset($input['_token']);
+        unset($input['_method']);
+
+        $status = \DB::table('t_siswa')->where('id', $id)->update($input);
+
+        if ($status) {
+            return redirect('/siswa')->with('success', 'Data Berhasil Diubah');
+        } else{
+            return redirect('/siswa/create')->with('error', 'Data Gagal Diubah');
+        }
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $status = \DB::table('t_siswa')->where('id', $id)->delete();
+
+        if ($status) {
+            return redirect('/siswa')->with('success', 'Data Berhasil Dihapus');
+        }else{
+            return redirect('/siswa/create')->with('error', 'Data Gagal Ditambahkan');
+        }
     }
 }

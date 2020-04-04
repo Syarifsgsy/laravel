@@ -30,6 +30,7 @@
 		<th>Lokasi Ruangan</th>
 		<th>Jurusan</th>
 		<th>Nama Wali Kelas</th>
+		<th>Aksi</th>
 		
 	</tr>
 	@foreach ($kelas as $row)
@@ -39,6 +40,15 @@
 		<td>{{ $row->lokasi_ruangan }}</td>
 		<td>{{ $row->jurusan }}</td>
 		<td>{{ $row->nama_wali_kelas }}</td>
+		<td>
+			<a href="{{ url('/kelas/' . $row->id . '/edit') }}" class="btn btn-outline-primary btn-sm "  style="background: lightgreen;" > Edit</a>
+
+			<form action="{{ url('/kelas/' . $row->id) }}" method="POST">
+				@method('DELETE')
+				@csrf
+				<button style="background: darkorange;" class="btn btn-outline-primary btn-sm" type="submit">Delete</button>
+			</form>
+		</td>
 	</tr>
 	@endforeach
 </table>

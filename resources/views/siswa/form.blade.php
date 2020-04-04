@@ -27,25 +27,29 @@
 	<div class="row-justify-content-center">
 	<div class="col-md-12 text-center">	
 	<h1 align="center">Form Siswa</h1>
-	<form action="{{ url('siswa') }}" method="POST">
+	<form action="{{ url('siswa', @$siswa->id ) }}" method="POST">
 		@csrf
+
+		@if(!empty($siswa))
+			@method('PATCH')
+		@endif
 
 		<div class="form-group">
 		<label for="nis">NIS</label>
-		<input type="text" id="nis" class="form-control bg-light border border-danger" placeholder="Masukkan NIS Anda" name="nis" value="{{ old('nis')	 }}"/>
+		<input type="text" id="nis" class="form-control bg-light border border-danger" placeholder="Masukkan NIS Anda" name="nis" value="{{ old('nis', @$siswa->nis)	 }}"/>
 		</div>
 
 		<div class="form-group">
 		<label for="nama_lengkap">Nama Lengkap</label>
-		<input type="text" id="nama_lengkap" class="form-control  bg-light border border-danger" placeholder="Masukkan Nama Lengkap Anda" name="nama_lengkap"  value="{{ old('nama_lengkap')	 }}">
+		<input type="text" id="nama_lengkap" class="form-control  bg-light border border-danger" placeholder="Masukkan Nama Lengkap Anda" name="nama_lengkap"  value="{{ old('nama_lengkap', @$siswa->nama_lengkap)	 }}">
 		</div>
 
 
 		<div class="form-group">
 		Jenis Kelamin	:<br>
-			<label class="form-check-label"><input style="border-color: red;"  class=" form-check-input" type="radio" name="jenkel"  id="pria"  value="L" {{old('jenkel')=="L" ? 'checked=' . '"' . 'checked' . '"' : '' }} />L</label><br>
+			<label class="form-check-label"><input style="border-color: red;"  class=" form-check-input" type="radio" name="jenkel"  id="pria"  value="L" {{old('jenkel', @$siswa->jenkel)=="L" ? 'checked=' . '"' . 'checked' . '"' : '' }} />L</label><br>
 
-			<label form-check-label><input style="border-color: red;"  class="form-check-input"  type="radio" name="jenkel" id="wanita" value="P" {{old('jenkel')=="P" ? 'checked=' . '"' . 'checked' . '"' : '' }} />P</label><br>
+			<label form-check-label><input style="border-color: red;"  class="form-check-input"  type="radio" name="jenkel" id="wanita" value="P" {{old('jenkel', @$siswa->jenkel)=="P" ? 'checked=' . '"' . 'checked' . '"' : '' }} />P</label><br>
 		</div>
 		
 		
@@ -53,10 +57,10 @@
 	    <label for="goldar">Golongan Darah</label>
 	    <select multiple class="form-control bg-light border border-danger" id="goldar" name="goldar"  >
 	      <option readonly value=""> -Pilih Golongan Darah Anda- </option>
-	      <option value="A" @if (old('goldar') == "A") {{ 'selected' }} @endif>A</option>
-	      <option value="B" @if (old('goldar') == "B") {{ 'selected' }} @endif>B</option>
-	      <option value="O" @if (old('goldar') == "O") {{ 'selected' }} @endif>O</option>
-	      <option value="AB" @if (old('goldar') == "AB") {{ 'selected' }} @endif>AB</option>
+	      <option value="A" @if (old('goldar', @$siswa->goldar) == "A") {{ 'selected' }} @endif>A</option>
+	      <option value="B" @if (old('goldar', @$siswa->goldar) == "B") {{ 'selected' }} @endif>B</option>
+	      <option value="O" @if (old('goldar', @$siswa->goldar) == "O") {{ 'selected' }} @endif>O</option>
+	      <option value="AB" @if (old('goldar', @$siswa->goldar) == "AB") {{ 'selected' }} @endif>AB</option>
 	    </select>
 	  </div><br>
 		<button  class="btn btn-outline-danger" value="Simpan" type="submit">Simpan</button>

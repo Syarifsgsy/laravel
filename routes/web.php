@@ -37,6 +37,17 @@ Route::patch('/kelas/{id}', 'KelasController@update');
 Route::delete('/kelas/{id}', 'KelasController@destroy');
 
 
+
+Route::get('/guru', 'GuruController@index');
+Route::get('/guru/create', 'GuruController@create');
+Route::post('/guru', 'GuruController@store');
+Route::get('/guru/{id}/edit', 'GuruController@edit');
+Route::patch('/guru/{id}', 'GuruController@update');
+Route::delete('/guru/{id}', 'GuruController@destroy');
+
+
+
+
 // Route::get('/belajar', function() {
 	
 // 	// echo "Belajar PHP, Tulisan ini ditampilkan dari routes";

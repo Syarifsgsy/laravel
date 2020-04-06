@@ -8,11 +8,12 @@ class KelasController extends Controller
 {
     public function index()
     {
-    	$data1['kelas']  =\DB::table('t_kelas')
+    	// $data['kelas']  =\DB::table('t_kelas')
     	 // ->orderBy('jurusan', 'desc', 'nama_kelas', 'asc')
     	 // ->where('nama_wali_kelas','like','A%')
-    	->get();
-		return view('kelas',$data1);
+    	// ->get();
+        $data['kelas']  =\App\Kelas::orderBy('nama_kelas')->get();
+		return view('kelas',$data);
 
     }
 
@@ -43,8 +44,16 @@ class KelasController extends Controller
         
 
     	$input	=$request->all();
-    	unset($input['_token']);
-    	$status	= \DB::table('t_kelas')->insert($input);
+    	// unset($input['_token']);
+    	// $status	= \DB::table('t_kelas')->insert($input);
+
+        // $status = \App\Kelas::create($input);
+        $kelas                      = new \App\Kelas; 
+        $kelas->nama_kelas          = $input['nama_kelas'];
+        $kelas->lokasi_ruangan      = $input['lokasi_ruangan'];
+        $kelas->jurusan             = $input['jurusan'];
+        $kelas->nama_wali_kelas     = $input['nama_wali_kelas'];
+        $status                     = $kelas->save();
 
     	if ($status){
     		return redirect('/kelas')->with(['success' => ' Data Berhasil ditambahkan']);
@@ -80,10 +89,20 @@ class KelasController extends Controller
         $this->validate($request, $rule,$pesan);
 
         $input  =$request->all();
-        unset($input['_token']);
-        unset($input['_method']);
+        // unset($input['_token']);
+        // unset($input['_method']);
 
-        $status = \DB::table('t_kelas')->where('id', $id)->update($input);
+        // $status = \DB::table('t_kelas')->where('id', $id)->update($input);
+
+        $kelas  =\App\Kelas::find($id);
+        // $status =$kelas->update($input);
+
+ 
+        $kelas->nama_kelas          = $input['nama_kelas'];
+        $kelas->lokasi_ruangan      = $input['lokasi_ruangan'];
+        $kelas->jurusan             = $input['jurusan'];
+        $kelas->nama_wali_kelas     = $input['nama_wali_kelas'];
+        $status                     = $kelas->update();
 
         if ($status) {
             return redirect('/kelas')->with('success', 'Data Berhasil Diubah');
@@ -94,12 +113,16 @@ class KelasController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $status = \DB::table('t_kelas')->where('id', $id)->delete();
+        $kelas      =\App\Kelas::find($id);
+        $status     =$kelas->delete();
+
+
+        // $status = \DB::table('t_kelas')->where('id', $id)->delete();
 
         if ($status) {
             return redirect('/kelas')->with('success', 'Data Berhasil Dihapus');
         }else{
-            return redirect('/kelas/create')->with('error', 'Data Gagal Ditambahkan');
+            return redirect('/kelas/create')->with('error', 'Data Gagal Dihapus');
         }
     }
 }

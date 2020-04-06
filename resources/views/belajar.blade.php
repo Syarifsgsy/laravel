@@ -12,12 +12,12 @@ Belajar PHP. Halaman dari Controllers.<br>
 
 @if(session('success'))
 <div class="alert alert-success">
-	<p>Data Berhasil ditambahkan</p>
+	{{ session('success') }}
 </div>
 @endif
 
 @if(session('error'))
-<div class="alert alert-error">
+<div class="alert alert-danger">
 	{{ session('error') }}
 </div>
 @endif
